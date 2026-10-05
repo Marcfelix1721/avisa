@@ -1,7 +1,7 @@
 #!/bin/sh
 # Descarga los vídeos de la web a la carpeta video/.
 # Se ejecuta una vez, antes de publicar:  sh videos.sh
-# Mientras no estén en video/, la web los carga desde la copia remota (ver VIDEO_REMOTE en index.html).
+# La web solo usa los de video/: si falta alguno, en su sitio se queda la foto fija.
 cd "$(dirname "$0")" || exit 1
 mkdir -p video
 B="https://d2ol7oe51mr4n9.cloudfront.net/user_3JEdsYjd5OrgQ3CLgWpic3aAmft"
@@ -20,5 +20,5 @@ get a4ca3be8-2ab7-49ed-81b6-e3b9c4da9ea0 agencia.mp4
 get d02288fb-b8e2-404b-860f-f5f76c46feb2 academia.mp4
 get 1910d612-e974-4be1-a27a-9061f1d66583 banda.mp4
 get 752b7110-dffa-41bd-8790-3e2de6cc3e6f banda-movil.mp4
-[ "$fail" = 0 ] && echo "Listo: vídeos en video/" || echo "Algún vídeo no se descargó; la web usará la copia remota para ese."
+[ "$fail" = 0 ] && echo "Listo: vídeos en video/" || echo "Algún vídeo no se descargó; en su sitio la web enseñará la foto fija."
 exit 0

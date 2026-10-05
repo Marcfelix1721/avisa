@@ -114,6 +114,8 @@ button{font:inherit;color:inherit}
 .p-head{display:flex;align-items:center;gap:9px;padding:9px 12px;background:var(--forest);color:#fff}
 .p-back,.p-more{width:20px;height:20px;flex:none;opacity:.9}
 .p-av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;background:#DCE5E0}
+.p-av--ic{display:grid;place-items:center;background:var(--green-tint);color:var(--green-deep)}
+.p-av--ic svg{width:20px;height:20px}
 .p-who{min-width:0;flex:1;display:grid}
 .p-who b{font:600 15.5px/1.22 var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .p-who span{font-size:12.5px;line-height:1.25;color:#D5EDE5}
@@ -162,6 +164,9 @@ button{font:inherit;color:inherit}
 .scene::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(200deg,rgba(4,28,22,.34) 0,rgba(4,28,22,0) 30%);pointer-events:none}
 .scene-tag{position:absolute;z-index:3;top:14px;right:14px;display:inline-flex;align-items:center;gap:7px;padding:7px 12px 7px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:var(--ink);font:600 .8rem/1 var(--display);box-shadow:0 6px 16px -8px rgba(4,28,22,.5)}
 .scene-tag i{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 rgba(0,192,84,.5);animation:pulse 2s infinite}
+/* Aviso de imagen generada con IA: va sobre cada foto o vídeo y se ve sin tocar nada (Reglamento europeo de IA, art. 50). No lo quites mientras las imágenes sean generadas. */
+.ia{position:absolute;z-index:3;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.9);color:var(--ink-2);font:500 11.5px/1.15 var(--text);white-space:nowrap;box-shadow:0 4px 12px -6px rgba(4,28,22,.45);pointer-events:none}
+.scene .ia{top:48px;right:14px;font-size:calc(11.5px / var(--z,1))}
 @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,192,84,.55)}70%,100%{box-shadow:0 0 0 7px rgba(0,192,84,0)}}
 .phone{position:relative;z-index:4;margin:-64px 14px 0;border-radius:22px;overflow:hidden;background:var(--wall) var(--doodle) 0 0/300px;box-shadow:0 28px 54px -24px rgba(4,28,22,.55),0 0 0 1px rgba(4,28,22,.07)}
 .screen{display:flex;flex-direction:column}
@@ -197,7 +202,7 @@ button{font:inherit;color:inherit}
 
 @media(min-width:1060px){
   .hero-in{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:clamp(28px,3.4vw,58px)}
-  .stage{width:720px;height:640px;margin:0;zoom:.8}
+  .stage{width:720px;height:640px;margin:0;zoom:.8;--z:.8}
   .scene{position:absolute;right:0;top:0;width:540px;border-radius:28px}
   .phone{position:absolute;left:0;top:44px;width:296px;height:596px;margin:0;padding:9px;border-radius:48px;background:#0C1613;overflow:visible;box-shadow:0 44px 74px -34px rgba(4,28,22,.65),inset 0 0 0 1.5px #2B3A35}
   .screen{height:100%;border-radius:39px;overflow:hidden;background:var(--wall) var(--doodle) 0 0/300px}
@@ -209,9 +214,9 @@ button{font:inherit;color:inherit}
   .sheet{position:absolute;right:0;top:384px;width:392px;margin:0}
   .stage-cap{position:absolute;right:0;top:586px;width:392px;margin:0;text-align:left}
 }
-@media(min-width:1140px){.stage{zoom:.9}}
-@media(min-width:1240px){.stage{zoom:1}}
-@media(min-width:1600px){:root{--hero-w:min(1420px,100% - 96px)}.stage{zoom:1.12}.hero h1{font-size:3.85rem}}
+@media(min-width:1140px){.stage{zoom:.9;--z:.9}}
+@media(min-width:1240px){.stage{zoom:1;--z:1}}
+@media(min-width:1600px){:root{--hero-w:min(1420px,100% - 96px)}.stage{zoom:1.12;--z:1.12}.hero h1{font-size:3.85rem}}
 /* portátiles bajos: que todo el hero quepa en la primera pantalla */
 @media(min-width:1060px) and (max-height:800px){
   .hero{padding-block:calc(var(--nav-h) + 16px) 46px}
@@ -221,8 +226,8 @@ button{font:inherit;color:inherit}
   .cta-row{margin-top:20px}
   .pick{margin-top:22px}
 }
-@media(min-width:1140px) and (max-height:800px){.stage{zoom:.86}}
-@media(min-width:1060px) and (max-height:690px){.stage{zoom:.76}}
+@media(min-width:1140px) and (max-height:800px){.stage{zoom:.86;--z:.86}}
+@media(min-width:1060px) and (max-height:690px){.stage{zoom:.76;--z:.76}}
 
 /* ---------- clientes ---------- */
 .clients{padding-block:30px 34px;background:var(--paper);border-bottom:1px solid var(--line);overflow:hidden}
@@ -245,6 +250,7 @@ button{font:inherit;color:inherit}
 .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
 .sector:hover .ph img{transform:scale(1.04)}
 .sector figure .b{position:absolute;right:16px;bottom:-22px;max-width:min(86%,390px);text-wrap:pretty}
+.sector figure .ia{top:12px;left:12px}
 .sector h3{margin-bottom:8px;font-size:clamp(1.36rem,1.2rem + .6vw,1.6rem)}
 .sector p{color:var(--ink-2);max-width:32em}
 .sector .tlink{display:inline-block;margin-top:14px;font-size:.96rem}
@@ -321,6 +327,7 @@ button{font:inherit;color:inherit}
 .band-media video{opacity:0;transition:opacity .5s linear}
 .band-media video.is-on{opacity:1}
 .band-media::after{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(0deg,rgba(6,20,26,.5) 0,rgba(6,20,26,0) 46%);pointer-events:none}
+.band-media .ia{top:16px;left:max(20px,calc((100% - 1180px)/2))}
 .band-in{position:relative;z-index:3;margin-top:-46px}
 .band-in .wrap{display:flex;justify-content:flex-end}
 .band .b{max-width:min(560px,100%);text-wrap:balance}
@@ -336,6 +343,11 @@ button{font:inherit;color:inherit}
 .tag{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:8px;background:var(--green-tint);color:#07683A;font:600 .82rem/1 var(--display)}
 .case p{margin-top:18px;color:var(--ink-2);max-width:33em}
 .case .cta-row{margin-top:28px}
+.case-facts{display:grid;gap:9px;margin-top:20px;color:var(--ink-2)}
+.case-facts li{display:flex;align-items:flex-start;gap:10px}
+.case-facts .tk{flex:none;width:20px;height:13px;margin-top:7px;color:var(--tick)}
+.file{display:flex;align-items:center;gap:9px;margin:1px -3px 0;padding:6px 14px 6px 6px;border-radius:7px;background:#F0F2F5;font-weight:500}
+.file i{display:grid;place-items:center;flex:none;width:30px;height:36px;border-radius:5px;background:#E5484D;color:#fff;font:700 9.5px/1 var(--text);font-style:normal;letter-spacing:.02em}
 .chatcard{border-radius:26px;overflow:hidden;background:var(--wall) var(--doodle) 0 0/300px;box-shadow:0 34px 64px -36px rgba(4,28,22,.55),0 0 0 1px rgba(4,28,22,.07)}
 .chatcard .thread{padding:14px 16px 18px;gap:6px}
 .chatcard .day{margin-top:6px}
@@ -385,6 +397,7 @@ button{font:inherit;color:inherit}
 .csend svg{width:22px;height:22px;margin-left:3px}
 .composer-foot{margin-top:12px;font-size:.84rem;line-height:1.4;color:var(--ink-3)}
 .composer-foot b{color:var(--ink);font-weight:600;white-space:nowrap}
+.composer-foot a{color:var(--ink);text-underline-offset:3px}
 @media(min-width:900px){.cta-in{grid-template-columns:minmax(0,1fr) minmax(0,480px);gap:clamp(48px,7vw,96px)}}
 
 /* ---------- pie ---------- */
@@ -392,7 +405,8 @@ button{font:inherit;color:inherit}
 .foot-in{display:grid;gap:26px}
 .foot img{height:30px;width:auto;margin-bottom:16px}
 .foot a{color:#DDEBE5;text-underline-offset:3px}
-.foot-legal{max-width:36em}
+.foot-links{display:flex;flex-wrap:wrap;gap:8px 24px;margin-top:16px;font-weight:500}
+.foot-legal{display:grid;gap:12px;align-content:start;max-width:36em}
 @media(min-width:800px){.foot-in{grid-template-columns:1fr 1fr;gap:64px}}
 
 .fab{position:fixed;z-index:60;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;height:58px;padding:0 22px 0 18px;border-radius:999px;background:var(--green);color:var(--ink);font:600 1rem/1 var(--display);text-decoration:none;box-shadow:0 16px 32px -12px rgba(0,110,54,.7);transform:translateY(140%);opacity:0;transition:transform .45s var(--pop),opacity .25s}
@@ -503,6 +517,7 @@ button{font:inherit;color:inherit}
         <img class="scene-img" id="sceneB" alt="" width="960" height="640" decoding="async">
         <div id="sceneVids"></div>
         <figcaption class="scene-tag"><i></i><span id="sceneTag">Clínica dental</span></figcaption>
+        <span class="ia">Imagen generada con IA</span>
       </figure>
 
       <div class="phone" aria-hidden="true">
@@ -541,7 +556,7 @@ button{font:inherit;color:inherit}
   </div>
 </section>
 
-<section class="clients" aria-label="Clientes">
+<section class="clients" aria-label="Empresas con las que hemos trabajado">
   <p class="clients-lab">Empresas con las que hemos trabajado</p>
   <div class="marquee">
     <div class="mtrack">
@@ -562,6 +577,7 @@ button{font:inherit;color:inherit}
       <article class="sector">
         <figure>
           <div class="ph"><img src="img/momento-clinica-840.webp" srcset="img/momento-clinica-560.webp 560w, img/momento-clinica-840.webp 840w, img/momento-clinica-1320.webp 1320w" sizes="(min-width:1220px) 573px, (min-width:760px) 47vw, 100vw" alt="Fisioterapeuta tratando el hombro de una paciente en su consulta" width="840" height="560" loading="lazy" decoding="async"></div>
+          <span class="ia">Imagen generada con IA</span>
           <div class="b b--out b--lg pop">Te recordamos tu cita de mañana a las 10:30. ¿Nos la confirmas?<span class="meta">19:30<svg class="tk is-read"><use href="#i-dt"/></svg></span></div>
         </figure>
         <h3>Clínicas, fisios, dentistas</h3>
@@ -571,6 +587,7 @@ button{font:inherit;color:inherit}
       <article class="sector">
         <figure>
           <div class="ph"><img src="img/momento-taller-840.webp" srcset="img/momento-taller-560.webp 560w, img/momento-taller-840.webp 840w, img/momento-taller-1320.webp 1320w" sizes="(min-width:1220px) 573px, (min-width:760px) 47vw, 100vw" alt="Mecánico entregando las llaves del coche a una clienta en el taller" width="840" height="560" loading="lazy" decoding="async"></div>
+          <span class="ia">Imagen generada con IA</span>
           <div class="b b--out b--lg pop">Tu coche ya está listo. Puedes recogerlo hoy hasta las 19:00.<span class="meta">12:05<svg class="tk is-read"><use href="#i-dt"/></svg></span></div>
         </figure>
         <h3>Talleres, instaladores, reparto</h3>
@@ -580,6 +597,7 @@ button{font:inherit;color:inherit}
       <article class="sector">
         <figure>
           <div class="ph"><img src="img/momento-agencia-840.webp" srcset="img/momento-agencia-560.webp 560w, img/momento-agencia-840.webp 840w, img/momento-agencia-1320.webp 1320w" sizes="(min-width:1220px) 573px, (min-width:760px) 47vw, 100vw" alt="Guía pasando lista a los viajeros dentro del autocar antes de salir" width="840" height="560" loading="lazy" decoding="async"></div>
+          <span class="ia">Imagen generada con IA</span>
           <div class="b b--out b--lg pop">Tu parada mañana: Mollet (estación), 07:00.<span class="meta">19:30<svg class="tk is-read"><use href="#i-dt"/></svg></span></div>
         </figure>
         <h3>Agencias de viajes y excursiones</h3>
@@ -589,6 +607,7 @@ button{font:inherit;color:inherit}
       <article class="sector">
         <figure>
           <div class="ph"><img src="img/momento-academia-840.webp" srcset="img/momento-academia-560.webp 560w, img/momento-academia-840.webp 840w, img/momento-academia-1320.webp 1320w" sizes="(min-width:1220px) 573px, (min-width:760px) 47vw, 100vw" alt="Monitor de pádel explicando un golpe a tres alumnos en la pista" width="840" height="560" loading="lazy" decoding="async"></div>
+          <span class="ia">Imagen generada con IA</span>
           <div class="b b--out b--lg pop">La clase del jueves pasa a las 18:30.<span class="meta">16:40<svg class="tk is-read"><use href="#i-dt"/></svg></span></div>
         </figure>
         <h3>Academias, casales, clubs</h3>
@@ -660,6 +679,7 @@ button{font:inherit;color:inherit}
 <section class="band" aria-label="Una viajera espera el autocar con su aviso en el móvil">
   <div class="band-media" id="band">
     <img class="band-img" src="img/banda-1470.webp" srcset="img/banda-980.webp 980w, img/banda-1470.webp 1470w, img/banda-2200.webp 2200w" sizes="100vw" alt="Al amanecer, una viajera lee su aviso en el móvil en la parada mientras llega el autocar" width="1470" height="630" loading="lazy" decoding="async">
+    <span class="ia">Imagen generada con IA</span>
   </div>
   <div class="band-in"><div class="wrap">
     <div class="b b--out b--lg pop">Cada viajero recibe su parada y su hora la tarde antes. Ya nadie llama preguntando dónde se coge el bus.<span class="meta">21:12<svg class="tk is-read"><use href="#i-dt"/></svg></span></div>
@@ -670,29 +690,34 @@ button{font:inherit;color:inherit}
   <div class="wrap case-in">
     <div>
       <div class="case-who"><img src="img/cliente-samblas.webp" alt="Viatges Samblas" width="113" height="46" loading="lazy"><span class="tag">Caso real</span></div>
-      <h2>Una agencia de excursiones que dejó de pasar la tarde al teléfono</h2>
-      <p>La tarde antes de cada salida, cada viajero recibe por WhatsApp su parada, su hora y el punto de recogida. Al volver, una encuesta de valoración con botones. Todo sale solo de la hoja de reservas que ya usaban.</p>
-      <div class="cta-row"><a class="btn js-wa" href="https://wa.me/34671573420" data-wa="Hola, he visto el caso de la agencia de excursiones y me gustaría algo así para mi negocio.">Quiero algo así para mi negocio</a></div>
+      <h2>Toda la información del viaje, en el WhatsApp de cada viajero</h2>
+      <p>En septiembre de 2026, Viatges Samblas avisó por WhatsApp a los viajeros de su estancia en La Ràpita. Recibieron la información del viaje con el certificado del seguro en PDF, un cambio en la hora de vuelta y el recordatorio de una actividad.</p>
+      <ul class="case-facts">
+        <li><svg class="tk" aria-hidden="true"><use href="#i-dt"/></svg>Tres avisos distintos en cuatro días.</li>
+        <li><svg class="tk" aria-hidden="true"><use href="#i-dt"/></svg>Unos 60 mensajes entregados.</li>
+        <li><svg class="tk" aria-hidden="true"><use href="#i-dt"/></svg>Todo a partir de sus propias reservas.</li>
+      </ul>
+      <div class="cta-row"><a class="btn js-wa" href="https://wa.me/34671573420" data-wa="Hola, he visto el caso de Viatges Samblas y me gustaría algo así para mi negocio.">Quiero algo así para mi negocio</a></div>
     </div>
     <div>
       <div class="chatcard" aria-hidden="true">
         <div class="p-head">
           <svg class="p-back"><use href="#i-back"/></svg>
-          <img class="p-av" src="img/avatar-agencia.webp" alt="" width="36" height="36" loading="lazy">
+          <span class="p-av p-av--ic"><svg><use href="#i-store"/></svg></span>
           <div class="p-who"><b>Agencia de viajes</b><span>Cuenta de empresa</span></div>
           <svg class="p-more"><use href="#i-more"/></svg>
         </div>
         <div class="thread">
-          <div class="day pop">VIERNES</div>
-          <div class="msg msg--in pop"><div class="b b--in">Hola, Marta 👋 Mañana salimos hacia la Cerdanya. Tu parada: <b>Mollet (estación), 07:00</b>. Te esperamos delante de la estación de tren.<span class="meta">19:30</span><div class="qrs"><span class="qr"><svg><use href="#i-reply"/></svg>Confirmo</span><span class="qr"><svg><use href="#i-reply"/></svg>No podré ir</span></div></div></div>
-          <div class="msg msg--out pop" data-delay="500"><div class="b b--out">Confirmo<span class="meta">19:34<svg class="tk is-read"><use href="#i-dt"/></svg></span></div></div>
-          <div class="day pop" data-delay="900">SÁBADO</div>
-          <div class="msg msg--in pop" data-delay="1100"><div class="b b--in">¿Qué tal la excursión de hoy? Tu opinión nos ayuda a mejorar.<span class="meta">20:15</span><div class="qrs"><span class="qr">😀 Muy bien</span><span class="qr">🙂 Bien</span><span class="qr">😐 Regular</span></div></div></div>
-          <div class="msg msg--out pop" data-delay="1700"><div class="b b--out">😀 Muy bien<span class="meta">20:16<svg class="tk is-read"><use href="#i-dt"/></svg></span></div></div>
-          <div class="msg msg--in pop" data-delay="2300"><div class="b b--in">¡Gracias, Marta! Hasta la próxima salida 🚌<span class="meta">20:16</span></div></div>
+          <div class="day pop">JUEVES</div>
+          <div class="msg msg--in pop"><div class="b b--in">Hola, Marta 👋 Aquí tienes la información de tu estancia en La Ràpita: teléfono del seguro 24 h, número de póliza y día y hora de vuelta.<span class="meta">09:30</span></div></div>
+          <div class="msg msg--in pop" data-delay="500"><div class="b b--in"><span class="file"><i>PDF</i>Certificado del seguro.pdf</span><span class="meta">09:30</span></div></div>
+          <div class="msg msg--in pop" data-delay="1100"><div class="b b--in">Cambio de hora: el martes el autocar os recoge en el hotel a las <b>15:30</b>.<span class="meta">12:40</span></div></div>
+          <div class="day pop" data-delay="1700">DOMINGO</div>
+          <div class="msg msg--in pop" data-delay="1900"><div class="b b--in">Recordatorio: mañana tenéis la actividad del grupo. Salimos del hotel a las <b>10:00</b>.<span class="meta">18:00</span></div></div>
+          <div class="msg msg--out pop" data-delay="2500"><div class="b b--out">Perfecto, gracias 🙂<span class="meta">18:04<svg class="tk is-read"><use href="#i-dt"/></svg></span></div></div>
         </div>
       </div>
-      <p class="case-note">Mensajes de ejemplo del recorrido que recibe cada viajero.</p>
+      <p class="case-note">Mensajes de ejemplo, del mismo tipo que los que recibieron los viajeros.</p>
     </div>
   </div>
 </section>
@@ -710,7 +735,7 @@ button{font:inherit;color:inherit}
       </div>
       <div class="qa">
         <div class="b b--out">¿Me pueden bloquear el número?</div>
-        <div class="b b--in">No, porque no usamos apps no oficiales. Trabajamos con la API oficial, que es justo lo que evita los bloqueos que sí tienen las herramientas pirata.</div>
+        <div class="b b--in">Es muy difícil, porque no usamos apps no oficiales. Trabajamos con la API oficial, que es justo lo que evita los bloqueos que sí tienen las herramientas pirata.</div>
       </div>
       <div class="qa">
         <div class="b b--out">¿Tengo que cambiar mi forma de trabajar?</div>
@@ -756,7 +781,7 @@ button{font:inherit;color:inherit}
         <input id="cInput" type="text" inputmode="text" autocomplete="off" maxlength="80" placeholder="O escríbelo: peluquería…">
         <a class="csend" id="cSend" href="https://wa.me/34671573420" target="_blank" rel="noopener" aria-label="Enviar por WhatsApp"><svg aria-hidden="true"><use href="#i-send"/></svg></a>
       </div>
-      <p class="composer-foot">Se abre WhatsApp con el mensaje ya escrito. También puedes escribirnos al <b>671 57 34 20</b>.</p>
+      <p class="composer-foot">Se abre WhatsApp con el mensaje ya escrito. También puedes escribirnos al <b>671 57 34 20</b>. Lee cómo tratamos tus datos en la <a href="privacidad.html">política de privacidad</a>.</p>
     </form>
   </div>
 </section>
@@ -768,8 +793,12 @@ button{font:inherit;color:inherit}
     <div>
       <img src="img/logo-blanco.webp" alt="Enviuno" width="163" height="30" loading="lazy">
       <p>Avisos por WhatsApp para tu negocio.<br>Barcelona. WhatsApp <a class="js-wa" href="https://wa.me/34671573420">671 57 34 20</a></p>
+      <nav class="foot-links" aria-label="Información legal"><a href="aviso-legal.html">Aviso legal</a><a href="privacidad.html">Privacidad</a></nav>
     </div>
-    <p class="foot-legal">No estamos afiliados a WhatsApp ni a Meta Platforms, Inc. «WhatsApp» es una marca de Meta. Usamos su plataforma oficial de WhatsApp Business.</p>
+    <div class="foot-legal">
+      <p>No estamos afiliados a WhatsApp ni a Meta Platforms, Inc. «WhatsApp» es una marca de Meta. Usamos su plataforma oficial de WhatsApp Business.</p>
+      <p>Las fotos y los vídeos de esta web son imágenes generadas con IA. No muestran a personas ni a negocios reales.</p>
+    </div>
   </div>
 </footer>
 
@@ -805,8 +834,7 @@ var WA_NUMBER = "34671573420";
   window.addEventListener("scroll", navState, { passive: true });
 
   /* ---------- datos de cada sector ---------- */
-  /* Los vídeos se buscan primero en /video (ver videos.sh) y, si no están, en la copia remota. */
-  var VIDEO_REMOTE = "https://d2ol7oe51mr4n9.cloudfront.net/user_3JEdsYjd5OrgQ3CLgWpic3aAmft/";
+  /* Los vídeos están en /video (se bajan con videos.sh). Si falta alguno, se queda la foto. */
   var SECTORS = {
     clinica: {
       name: "Tu clínica dental", tag: "Clínica dental", alt: "Dentista atendiendo a un paciente en su clínica",
@@ -814,8 +842,7 @@ var WA_NUMBER = "34671573420";
       qr: ["Confirmo", "Cambiar la cita"], reply: "Confirmo", answer: "¡Perfecto! Te esperamos mañana a las 10:30 🙂",
       t1: "19:30", t2: "19:34",
       file: "citas.xlsx", cols: ["Paciente", "Cita", "Aviso", "Respuesta"], row: ["Laura P.", "Mié 10:30"], result: "Confirmada",
-      others: [["Joan F.", "Mié 11:15", "Leído", "Confirmada"], ["Carme V.", "Mié 12:00", "Enviado", "—"]],
-      video: "7b804292-2b65-4aa9-a53c-9cbb06577d23"
+      others: [["Joan F.", "Mié 11:15", "Leído", "Confirmada"], ["Carme V.", "Mié 12:00", "Enviado", "—"]]
     },
     taller: {
       name: "Tu taller", tag: "Taller mecánico", alt: "Mecánico trabajando bajo un coche subido al elevador",
@@ -823,8 +850,7 @@ var WA_NUMBER = "34671573420";
       qr: ["Paso hoy", "Mejor mañana"], reply: "Paso hoy", answer: "Genial, aquí te esperamos. Tendrás las llaves en recepción.",
       t1: "12:05", t2: "12:11",
       file: "trabajos.xlsx", cols: ["Cliente", "Trabajo", "Aviso", "Respuesta"], row: ["Jordi P.", "Frenos"], result: "Pasa hoy",
-      others: [["Anna R.", "Aceite", "Leído", "Mañana"], ["Pau S.", "Neumáticos", "Enviado", "—"]],
-      video: "496a132c-1bae-47fa-87db-73e524245551"
+      others: [["Anna R.", "Aceite", "Leído", "Mañana"], ["Pau S.", "Neumáticos", "Enviado", "—"]]
     },
     agencia: {
       name: "Tu agencia de viajes", tag: "Agencia de excursiones", alt: "Viajeros subiendo al autocar de una excursión",
@@ -832,8 +858,7 @@ var WA_NUMBER = "34671573420";
       qr: ["Confirmo", "No podré ir"], reply: "Confirmo", answer: "¡Nos vemos mañana a las 07:00! 🚌",
       t1: "19:30", t2: "19:34",
       file: "reservas.xlsx", cols: ["Viajero", "Parada", "Aviso", "Respuesta"], row: ["Marta S.", "Mollet 07:00"], result: "Confirmada",
-      others: [["Josep C.", "Lliçà 06:30", "Leído", "Confirmado"], ["Rosa M.", "Figaró 06:15", "Enviado", "—"]],
-      video: "a4ca3be8-2ab7-49ed-81b6-e3b9c4da9ea0"
+      others: [["Josep C.", "Lliçà 06:30", "Leído", "Confirmado"], ["Rosa M.", "Figaró 06:15", "Enviado", "—"]]
     },
     academia: {
       name: "Tu academia", tag: "Academia de idiomas", alt: "Profesora dando clase a un grupo de adultos",
@@ -841,8 +866,7 @@ var WA_NUMBER = "34671573420";
       qr: ["Me va bien", "No puedo"], reply: "Me va bien", answer: "Apuntado ✅ Nos vemos el jueves a las 18:30.",
       t1: "16:40", t2: "16:52",
       file: "alumnos.xlsx", cols: ["Alumno", "Clase", "Aviso", "Respuesta"], row: ["Núria C.", "Jue 18:30"], result: "Le va bien",
-      others: [["Pol R.", "Jue 18:30", "Leído", "Le va bien"], ["Clara F.", "Jue 18:30", "Enviado", "—"]],
-      video: "d02288fb-b8e2-404b-860f-f5f76c46feb2"
+      others: [["Pol R.", "Jue 18:30", "Leído", "Le va bien"], ["Clara F.", "Jue 18:30", "Enviado", "—"]]
     }
   };
   var ORDER = ["clinica", "taller", "agencia", "academia"];
@@ -909,12 +933,7 @@ var WA_NUMBER = "34671573420";
         v.muted = true; v.playsInline = true; v.preload = "auto";
         v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true"); v.tabIndex = -1;
         v.dataset.src = "local";
-        v.addEventListener("error", function () {
-          if (v.dataset.src === "local") {
-            v.dataset.src = "remote"; v.src = VIDEO_REMOTE + SECTORS[id].video + ".mp4"; v.load();
-            if (cur === id && visible) { var p = v.play(); if (p && p.catch) p.catch(noop); }
-          } else { v.dataset.src = "none"; v.classList.remove("is-on"); }
-        });
+        v.addEventListener("error", function () { v.dataset.src = "none"; v.classList.remove("is-on"); });
         v.addEventListener("playing", function () { if (cur === id) v.classList.add("is-on"); });
         v.src = "video/" + id + ".mp4";
         vidBox.appendChild(v);
@@ -1030,7 +1049,6 @@ var WA_NUMBER = "34671573420";
     if (conn.saveData || /(^|-)2g$/.test(conn.effectiveType || "")) return;
     var small = window.innerWidth < 760, v = null, state = "idle";
     var local = small ? "video/banda-movil.mp4" : "video/banda.mp4";
-    var remote = VIDEO_REMOTE + (small ? "752b7110-dffa-41bd-8790-3e2de6cc3e6f" : "1910d612-e974-4be1-a27a-9061f1d66583") + ".mp4";
     function play() { var p = v.play(); if (p && p.catch) p.catch(noop); }
     function start() {
       if (state === "none") return;
@@ -1038,9 +1056,7 @@ var WA_NUMBER = "34671573420";
         v = doc.createElement("video");
         v.muted = true; v.playsInline = true; v.preload = "auto";
         v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); v.setAttribute("aria-hidden", "true"); v.tabIndex = -1;
-        v.addEventListener("error", function () {
-          if (state === "local") { state = "remote"; v.src = remote; v.load(); play(); } else { state = "none"; v.classList.remove("is-on"); }
-        });
+        v.addEventListener("error", function () { state = "none"; v.classList.remove("is-on"); });
         v.addEventListener("playing", function () { v.classList.add("is-on"); });
         state = "local"; v.src = local; band.appendChild(v); play();
       } else if (v.ended || v.paused) {
