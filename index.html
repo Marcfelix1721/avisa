@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Avisa — Avisos por WhatsApp para tu negocio</title>
+<meta name="description" content="Recordatorios, confirmaciones y encuestas por WhatsApp que salen solos desde tu Excel, con la plataforma oficial de WhatsApp Business. Lo montamos y lo mantenemos por ti.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Avisa — Avisos por WhatsApp para tu negocio">
+<meta property="og:description" content="Recordatorios, confirmaciones y encuestas por WhatsApp que salen solos desde tu Excel. Lo montamos y lo mantenemos por ti.">
+<meta property="og:image" content="/img/bus.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#25D366;--green-dark:#075E54;--teal:#128C7E;--btn:#00A884;
+  --bubble:#DCF8C6;--chatbg:#ECE5DD;--mint:#E9F5EE;--grey:#F0F2F5;
+  --ink:#111B21;--muted:#54656F;--body:#3B4A54;--paper:#FFFFFF;--line:#E9EDEF;--tick:#34B7F1;
+  --doodle:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200' fill='none' stroke='%23075E54' stroke-opacity='0.06' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M24 44a20 16 0 1 1 8 12.8L22 62l3-9.5A16 16 0 0 1 24 44z'/%3E%3Cpath d='M116 46l7 7 13-14M128 53l2 2 13-14'/%3E%3Ccircle cx='152' cy='148' r='9'/%3E%3Cpath d='M92 106l16-5-9 14-2-6z'/%3E%3C/svg%3E");
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Roboto','Helvetica Neue',Arial,sans-serif;font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+h1,h2,h3{margin:0;line-height:1.12;letter-spacing:-.02em}
+h2{font-size:clamp(27px,3.6vw,38px);font-weight:700}
+h3{font-size:21px;font-weight:700}
+p{margin:0}
+a{color:var(--teal)}
+.wrap{width:min(1180px,100% - 40px);margin:0 auto}
+.section{padding:clamp(52px,7vw,84px) 0}
+.sub{color:var(--body);font-size:18px;max-width:600px}
+.btn{display:inline-flex;align-items:center;gap:9px;height:50px;padding:0 22px;border-radius:999px;background:var(--green);color:var(--ink);text-decoration:none;font-weight:500;font-size:16px;border:0;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(37,211,102,.35)}
+.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
+.link{color:var(--green-dark);font-weight:500;text-decoration:none}
+.link:hover{text-decoration:underline}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s,transform .7s}
+.reveal.in{opacity:1;transform:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes dots{0%,60%,100%{transform:translateY(0);opacity:.45}30%{transform:translateY(-4px);opacity:1}}
+@keyframes tick{0%,40%{color:#8696A0}60%,100%{color:var(--tick)}}
+.nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.logo{display:flex;align-items:center;gap:9px;text-decoration:none}
+.logo .mark{width:34px;height:34px}
+.logo strong{font-size:24px;color:var(--green-dark);letter-spacing:-.02em}
+.nav nav{display:flex;gap:26px;font-size:15px;font-weight:500}
+.nav nav a{color:var(--ink);text-decoration:none}
+.nav nav a:hover{color:var(--green-dark)}
+.nav .btn{height:40px;padding:0 16px;font-size:15px}
+@media(max-width:860px){.nav nav{display:none}}
+.hero{background:var(--mint);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:46px;align-items:center;padding:clamp(30px,5vw,54px) 0}
+.hero h1{font-size:clamp(33px,4.6vw,54px);font-weight:700;line-height:1.08;max-width:680px;animation:fadeUp .8s both}
+.hero .sub{margin-top:20px;font-size:clamp(17px,1.9vw,20px);animation:fadeUp .8s .12s both}
+.hero .cta{display:flex;align-items:center;gap:18px;margin-top:26px;flex-wrap:wrap;animation:fadeUp .8s .24s both}
+.hero .note{margin-top:16px;font-size:14px;color:var(--muted);animation:fadeUp .8s .34s both}
+.phone{width:320px;max-width:100%;height:600px;margin:0 auto;border-radius:42px;background:var(--ink);padding:11px;box-shadow:0 28px 56px rgba(17,27,33,.22);animation:fadeUp .9s .2s both}
+.screen{height:100%;border-radius:32px;overflow:hidden;background:var(--chatbg);display:flex;flex-direction:column;background-image:var(--doodle);background-size:210px}
+.chat-head{display:flex;align-items:center;gap:10px;padding:20px 13px 11px;background:var(--green-dark);color:#fff}
+.avatar{width:34px;height:34px;border-radius:999px;background:#DFE5E7;color:#8696A0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:700}
+.chat-head .who b{display:block;font-weight:500;font-size:15px}
+.chat-head .who span{font-size:12px;color:#C8E6D9}
+.msgs{flex:1;display:flex;flex-direction:column;gap:8px;padding:13px 10px;justify-content:flex-end}
+.chip{align-self:center;font-size:11px;font-weight:500;color:var(--muted);background:#fff;padding:4px 10px;border-radius:8px;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.msg{max-width:80%;padding:7px 9px 5px 10px;border-radius:10px;font-size:13.5px;line-height:1.35;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.msg.out{align-self:flex-end;background:var(--bubble);border-top-right-radius:2px}
+.msg.in{align-self:flex-start;background:#fff;border-top-left-radius:2px}
+.msg .meta{display:flex;justify-content:flex-end;align-items:center;gap:3px;font-size:10px;color:#667781;margin-top:3px}
+.msg .meta .tk{animation:tick 3s ease-in-out infinite}
+.typing{display:flex;gap:4px;padding:10px 12px;background:#fff;border-radius:10px;border-top-left-radius:2px;align-self:flex-start}
+.typing .d{width:6px;height:6px;border-radius:999px;background:#8696A0;animation:dots 1.2s infinite}
+.typing .d:nth-child(2){animation-delay:.15s}.typing .d:nth-child(3){animation-delay:.3s}
+.qr{align-self:flex-end;width:80%;display:flex;flex-direction:column;gap:4px}
+.qr span{height:34px;display:flex;align-items:center;justify-content:center;background:#fff;color:var(--btn);border-radius:8px;font-size:13.5px;font-weight:500;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.phone{width:290px;height:560px}}
+.sectors{background:var(--grey)}
+.sectors .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:30px}
+.card{display:flex;gap:20px;align-items:center;padding:20px;background:#fff;border-radius:18px;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(17,27,33,.08)}
+.card img{width:210px;height:158px;flex-shrink:0;object-fit:cover;border-radius:12px}
+.card p{color:var(--body);font-size:15.5px;margin-top:7px}
+@media(max-width:860px){.sectors .grid{grid-template-columns:1fr}.card{flex-direction:column;align-items:flex-start}.card img{width:100%;height:190px}}
+.how .wrap{display:grid;grid-template-columns:1fr;gap:10px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px}
+.step .n{font-weight:700;font-size:30px;color:var(--teal);line-height:1}
+.step h3{margin-top:10px}
+.step p{color:var(--body);font-size:15.5px;margin-top:7px}
+@media(max-width:860px){.steps{grid-template-columns:1fr;gap:24px}}
+.band{position:relative;height:clamp(300px,38vw,460px);overflow:hidden}
+.band img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.band .float{position:absolute;left:max(20px,calc((100% - 1180px)/2));bottom:42px;max-width:min(440px,calc(100% - 40px));padding:13px 16px 9px;background:var(--bubble);border-radius:14px;border-top-right-radius:2px;font-size:clamp(15px,1.9vw,17px);box-shadow:0 12px 30px rgba(17,27,33,.22)}
+.band .float .meta{display:flex;justify-content:flex-end;gap:4px;font-size:12px;color:#667781;margin-top:4px}
+.case{background:var(--mint)}
+.case .wrap{display:grid;grid-template-columns:.95fr 1.05fr;gap:50px;align-items:center}
+.case img{width:100%;height:400px;object-fit:cover;border-radius:18px}
+.case .tag{font-size:13px;font-weight:500;color:var(--green-dark);text-transform:uppercase;letter-spacing:.06em}
+.case h2{margin-top:10px}
+.case .col{display:flex;flex-direction:column;gap:14px;margin-top:18px;color:var(--body);font-size:17px}
+.case .quote{align-self:flex-start;max-width:540px;padding:11px 15px;background:#fff;border-radius:14px;border-top-left-radius:2px;color:var(--ink);box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.stats{display:flex;gap:14px;margin-top:6px;flex-wrap:wrap}
+.stat{flex:1;min-width:120px;padding:16px 18px;background:#14201B;color:#F6F4EE;border-radius:16px}
+.stat b{display:block;font-size:30px;font-weight:700;color:#B9E3CB;letter-spacing:-.02em}
+.stat span{font-size:13px;color:#C9D1CB}
+@media(max-width:860px){.case .wrap{grid-template-columns:1fr}.case img{height:280px}}
+.pricing .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:30px}
+.price{padding:32px;display:flex;flex-direction:column;gap:10px;border-right:1px solid var(--line)}
+.price:last-child{border-right:0}
+.price .amt{font-size:32px;font-weight:700;color:var(--green-dark);letter-spacing:-.02em}
+.price .amt small{font-size:15px;color:var(--muted);font-weight:500}
+.price p{color:var(--body);font-size:15px}
+.price.hi{background:var(--mint)}
+@media(max-width:860px){.pricing .grid{grid-template-columns:1fr}.price{border-right:0;border-bottom:1px solid var(--line)}}
+.faq .wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 46px;margin-top:30px}
+.qa h3{font-size:18px}
+.qa p{color:var(--body);font-size:15.5px;margin-top:7px}
+@media(max-width:860px){.faq .wrap{grid-template-columns:1fr}}
+.final{background:var(--green-dark);color:#fff;text-align:center}
+.final h2{color:#fff}.final p{color:#C8E6D9;margin:14px auto 0;max-width:520px}
+.final .cta{display:flex;gap:14px;justify-content:center;margin-top:26px;flex-wrap:wrap}
+.final .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.4);color:#fff}
+footer{padding:36px 0;background:#0B141A;color:#8696A0;font-size:13.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a{color:#C8E6D9}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+
+  /* Clients marquee (worked-with) */
+  .clients{background:var(--grey);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+  .clients .lab{text-align:center;font-size:13px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;padding:clamp(30px,4vw,42px) 20px 0}
+  .marquee{display:flex;overflow:hidden;margin-top:24px;padding-bottom:clamp(30px,4vw,42px);-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .mtrack{display:flex;align-items:center;gap:60px;padding-right:60px;flex-shrink:0;animation:mscroll 28s linear infinite;will-change:transform}
+  .clients:hover .mtrack{animation-play-state:paused}
+  @keyframes mscroll{to{transform:translateX(-50%)}}
+  .mitem{display:flex;align-items:center;flex-shrink:0;opacity:.72;transition:opacity .25s,transform .25s}
+  .mitem:hover{opacity:1;transform:translateY(-2px)}
+  .mitem img{height:34px;width:auto;display:block}
+  .mitem .wm{font-weight:700;font-size:21px;color:var(--muted);white-space:nowrap;letter-spacing:-.01em}
+  @media (prefers-reduced-motion:reduce){.mtrack{animation:none;flex-wrap:wrap;justify-content:center;width:100%;padding-right:0;gap:20px 46px}.marquee{-webkit-mask-image:none;mask-image:none}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top"><svg class="mark" viewBox="0 0 48 48"><rect width="48" height="48" rx="11" fill="#075E54"/><g transform="translate(24,24) scale(0.7) translate(-24,-25.8)" fill="#FFFFFF"><path d="M24 7.2c-1.2 0-2.2 1-2.2 2.2v1.3c-4.9 1-8.6 5.4-8.6 10.6 0 6.3-1.5 9.2-3.4 11.6-.9 1.1-.1 2.8 1.4 2.8h25.6c1.5 0 2.3-1.7 1.4-2.8-1.9-2.4-3.4-5.3-3.4-11.6 0-5.2-3.7-9.6-8.6-10.6V9.4c0-1.2-1-2.2-2.2-2.2z"/><path d="M19 39.4a5 5 0 0 0 10 0z"/></g></svg><strong>Avisa</strong></a>
+    <nav>
+      <a href="#sectores">Para quién</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#caso">Caso real</a>
+      <a href="#precios">Precios</a>
+    </nav>
+    <a class="btn js-wa" href="#contacto">Pedir una demo</a>
+  </div>
+</header>
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1>Avisa a tus clientes por WhatsApp, sin levantar el teléfono.</h1>
+      <p class="sub">Recordatorios, confirmaciones y encuestas que salen solos desde tu Excel, con la plataforma oficial de WhatsApp Business. Nosotros lo montamos, lo conectamos y lo mantenemos. Tú solo ves las respuestas.</p>
+      <div class="cta">
+        <a class="btn js-wa" href="#contacto">Pedir una demo</a>
+        <a class="link" href="#como">Ver cómo funciona →</a>
+      </div>
+      <p class="note">Plataforma oficial de WhatsApp Business. Sin apps raras, sin riesgo de que te bloqueen el número.</p>
+    </div>
+    <div class="phone" aria-hidden="true">
+      <div class="screen">
+        <div class="chat-head">
+          <div class="avatar">A</div>
+          <div class="who"><b>Agència de viatges</b><span>en línea</span></div>
+        </div>
+        <div class="msgs">
+          <div class="chip">HOY 19:30</div>
+          <div class="msg out">Hola Marta 👋 Mañana salimos hacia la Cerdanya. Tu parada: <b>Mollet (estación), 07:00</b>.<div class="meta">19:30 <span class="tk">✓✓</span></div></div>
+          <div class="msg out">¿Nos confirmas que vienes?<div class="meta">19:30 <span class="tk">✓✓</span></div></div>
+          <div class="qr"><span>✓ Confirmo</span><span>No podré ir</span></div>
+          <div class="msg in">Confirmo 🙂<div class="meta">19:34</div></div>
+          <div class="typing"><div class="d"></div><div class="d"></div><div class="d"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="clients"><p class="lab reveal">Empresas con las que hemos trabajado</p><div class="marquee"><div class="mtrack"><span class="mitem"><img src="/img/aldago.png" alt="Aldago"></span><span class="mitem"><img src="/img/desatascos.png" alt="Desatascos GMAS"></span><span class="mitem"><img src="/img/samblas.png" alt="Viatges Samblas"></span><span class="mitem"><span class="wm">Noel Moran Races</span></span><span class="mitem"><span class="wm">Kilbeggan Distillery</span></span><span class="mitem"><img src="/img/aldago.png" alt="Aldago"></span><span class="mitem"><img src="/img/desatascos.png" alt="Desatascos GMAS"></span><span class="mitem"><img src="/img/samblas.png" alt="Viatges Samblas"></span><span class="mitem"><span class="wm">Noel Moran Races</span></span><span class="mitem"><span class="wm">Kilbeggan Distillery</span></span><span class="mitem"><img src="/img/aldago.png" alt="Aldago"></span><span class="mitem"><img src="/img/desatascos.png" alt="Desatascos GMAS"></span><span class="mitem"><img src="/img/samblas.png" alt="Viatges Samblas"></span><span class="mitem"><span class="wm">Noel Moran Races</span></span><span class="mitem"><span class="wm">Kilbeggan Distillery</span></span><span class="mitem"><img src="/img/aldago.png" alt="Aldago"></span><span class="mitem"><img src="/img/desatascos.png" alt="Desatascos GMAS"></span><span class="mitem"><img src="/img/samblas.png" alt="Viatges Samblas"></span><span class="mitem"><span class="wm">Noel Moran Races</span></span><span class="mitem"><span class="wm">Kilbeggan Distillery</span></span></div></div></section>
+<section class="section sectors" id="sectores">
+  <div class="wrap">
+    <h2 class="reveal">Para negocios que viven de avisar a sus clientes</h2>
+    <div class="grid">
+      <div class="card reveal"><img src="/img/clinica.webp" alt="Recepcionista de una clínica con el móvil"><div><h3>Clínicas, fisios, dentistas</h3><p>Recordatorio de cita con confirmación en un botón. Menos huecos en la agenda y menos llamadas para confirmar.</p></div></div>
+      <div class="card reveal"><img src="/img/taller.webp" alt="Mecánico en su taller con el móvil"><div><h3>Talleres, instaladores, reparto</h3><p>"Tu coche está listo", "el técnico llega entre las 9 y las 11", "tu pedido sale hoy". Sin llamadas perdidas.</p></div></div>
+      <div class="card reveal"><img src="/img/agencia.webp" alt="Dueña de una agencia de viajes con el móvil"><div><h3>Agencias de viajes y excursiones</h3><p>Parada, hora y punto de recogida para cada viajero la tarde anterior. Encuesta de valoración al volver.</p></div></div>
+      <div class="card reveal"><img src="/img/bus.jpg" alt="Clientes en un autobús mirando el móvil"><div><h3>Academias, casales, clubs</h3><p>Plaza confirmada, cambio de horario, recordatorio de pago. Un solo mensaje y todos enterados a la vez.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section how" id="como">
+  <div class="wrap">
+    <h2 class="reveal">En marcha en unas dos semanas</h2>
+    <p class="sub reveal">No cambias tu forma de trabajar. Te conectamos a los datos que ya tienes.</p>
+    <div class="steps">
+      <div class="step reveal"><div class="n">1</div><h3>Damos de alta tu número</h3><p>Con la plataforma oficial de WhatsApp Business. Solo necesitas un número que no esté en la app de WhatsApp. De la verificación con Meta nos encargamos nosotros.</p></div>
+      <div class="step reveal"><div class="n">2</div><h3>Lo conectamos a tus datos</h3><p>Excel, Google Sheets, Airtable o el programa que ya uses. Decidimos juntos qué se envía, a quién y cuándo.</p></div>
+      <div class="step reveal"><div class="n">3</div><h3>Se envía solo</h3><p>Cada aviso sale a su hora. Entregados, leídos y respuestas en un panel sencillo, y nosotros vigilamos que todo funcione.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="band reveal">
+  <img src="/img/bus.jpg" alt="Clienta en un autobús de excursión leyendo su recordatorio por WhatsApp">
+  <div class="float">Cada viajero recibe su parada y su hora la tarde antes. Ya nadie llama preguntando dónde se coge el bus.<div class="meta">21:12 <span style="color:var(--tick)">✓✓</span></div></div>
+</section>
+
+<section class="section case" id="caso">
+  <div class="wrap">
+    <img class="reveal" src="/img/agencia.webp" alt="Dueña de una agencia de excursiones revisando los avisos en su móvil">
+    <div class="reveal">
+      <span class="tag">Caso real</span>
+      <h2>Una agencia de excursiones que dejó de pasar la tarde al teléfono</h2>
+      <div class="col">
+        <p>La tarde antes de cada salida, cada viajero recibe por WhatsApp su parada, su hora y el punto de recogida. Al volver, una encuesta de valoración con botones. Todo sale solo de la hoja de reservas que ya usaban.</p>
+        <div class="quote">«Antes me pasaba la tarde llamando uno por uno. Ahora se manda solo y encima me contestan al momento.»<div class="meta" style="color:var(--muted);justify-content:flex-start">— [Nombre del cliente], [agencia]</div></div>
+        <div class="stats">
+          <div class="stat"><b>[N]</b><span>mensajes al mes</span></div>
+          <div class="stat"><b>[N] h</b><span>de llamadas ahorradas por salida</span></div>
+          <div class="stat"><b>[N]%</b><span>de encuestas respondidas</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section pricing" id="precios">
+  <div class="wrap">
+    <h2 class="reveal">Precios claros, sin permanencia</h2>
+    <p class="sub reveal">Una puesta en marcha, una cuota mensual pequeña y los mensajes a coste de Meta más una gestión.</p>
+    <div class="grid">
+      <div class="price reveal"><span class="tag" style="font-size:13px;font-weight:500;color:var(--green-dark);text-transform:uppercase;letter-spacing:.06em">Puesta en marcha</span><div class="amt">desde 1.500&nbsp;<small>€</small></div><p>Un flujo a medida, plantillas en castellano y catalán aprobadas por Meta, y la conexión a tu hoja o programa. Un pago único.</p></div>
+      <div class="price hi reveal"><span class="tag" style="font-size:13px;font-weight:500;color:var(--green-dark);text-transform:uppercase;letter-spacing:.06em">Mantenimiento</span><div class="amt">99–149&nbsp;<small>€/mes</small></div><p>Vigilancia de que todo funciona, cambios de plantillas, soporte y mejoras. Sin permanencia: te quedas si te compensa.</p></div>
+      <div class="price reveal"><span class="tag" style="font-size:13px;font-weight:500;color:var(--green-dark);text-transform:uppercase;letter-spacing:.06em">Mensajes</span><div class="amt">coste Meta&nbsp;<small>+ gestión</small></div><p>Pagas los mensajes a precio de Meta con un pequeño margen. Sin sorpresas y sin mínimos imposibles.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section faq">
+  <div class="wrap">
+    <h2 class="reveal" style="text-align:center">Lo que todo el mundo pregunta</h2>
+  </div>
+  <div class="wrap">
+    <div class="qa reveal"><h3>¿Esto es legal? ¿No es spam?</h3><p>Es la plataforma oficial de WhatsApp Business. Se envía solo a clientes que te han dado su número y su permiso, con opción de baja en cada mensaje. Nada de listas compradas.</p></div>
+    <div class="qa reveal"><h3>¿Me pueden bloquear el número?</h3><p>No, porque no usamos apps no oficiales. Trabajamos con la API oficial, que es justo lo que evita los bloqueos que sí tienen las herramientas pirata.</p></div>
+    <div class="qa reveal"><h3>¿Tengo que cambiar mi forma de trabajar?</h3><p>No. Nos conectamos a la hoja o el programa que ya usas. Tú sigues apuntando las cosas como siempre; los avisos salen de ahí.</p></div>
+    <div class="qa reveal"><h3>¿Cuánto tardáis en ponerlo en marcha?</h3><p>Normalmente unas dos semanas desde que nos pasas tus datos, incluyendo la verificación con Meta y las primeras plantillas.</p></div>
+  </div>
+</section>
+
+<section class="section final" id="contacto">
+  <div class="wrap">
+    <h2>¿Lo vemos con tus propios datos?</h2>
+    <p>Cuéntanos a qué te dedicas y te preparamos una demo con un mensaje real de tu negocio. Sin compromiso.</p>
+    <div class="cta">
+      <a class="btn js-wa" href="#">Escríbenos por WhatsApp</a>
+      <a class="btn ghost js-email" href="#">Enviar un email</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="wrap">
+    <div>Avisa · Avisos por WhatsApp para tu negocio<br>Barcelona · [tu email] · [tu teléfono]</div>
+    <div style="max-width:420px">No estamos afiliados a WhatsApp ni a Meta Platforms, Inc. "WhatsApp" es una marca de Meta. Usamos su plataforma oficial de WhatsApp Business.</div>
+  </div>
+</footer>
+<script>
+/* === CAMBIA ESTO: tu número de WhatsApp con prefijo (34...) y tu email === */
+var WA_NUMBER = "34600000000";
+var EMAIL = "hola@avisa.example";
+(function(){
+  var txt = encodeURIComponent("Hola, me interesa Avisa para mi negocio. Me dedico a ");
+  document.querySelectorAll(".js-wa").forEach(function(a){
+    a.href = "https://wa.me/" + WA_NUMBER + "?text=" + txt;
+    a.target = "_blank"; a.rel = "noopener";
+  });
+  document.querySelectorAll(".js-email").forEach(function(a){
+    a.href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent("Quiero una demo de Avisa");
+  });
+  if("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    },{threshold:.12});
+    document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(el){ el.classList.add("in"); });
+  }
+})();
+</script>
+</body>
+</html>
